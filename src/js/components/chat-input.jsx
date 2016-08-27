@@ -16,6 +16,7 @@ class ChatInput extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.stoppedTyping = this.stoppedTyping.bind(this);
     this.resetTextarea = this.resetTextarea.bind(this);
+    this.handleActionGIF = this.handleActionGIF.bind(this);
   }
 
 
@@ -120,6 +121,10 @@ class ChatInput extends React.Component {
     this.props.setChatInputState(false);
   }
 
+  handleActionGIF() {
+    this.props.switchMode('gif');
+  }
+
   renderActions() {
     return (<div className="chat-input--actions">
       <button className="chat-input--actions--item" onClick={this.handleActionGIF}>
@@ -131,7 +136,7 @@ class ChatInput extends React.Component {
   }
 
   render() {
-    return (<div className="chat-input">
+    return (<div className="chat-input" style={this.state.mode === 'gif' ? { transform: 'translate3d(0,-100vh, 0'} : {}}>
       <div className="chat-input--left">
         {this.renderActions()}
       </div>
@@ -155,6 +160,7 @@ ChatInput.displayName = 'ChatInput';
 // Uncomment properties you need
 ChatInput.propTypes = {
   setChatInputState: React.PropTypes.func.isRequired,
+  switchMode: React.PropTypes.func.isRequired,
 };
 // ChatInput.defaultProps = {};
 
