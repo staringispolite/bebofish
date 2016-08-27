@@ -34,7 +34,7 @@ class ChatInput extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.blurChat) {
       this.refs.textarea.blur();
-    } else if (!nextProps.blurChat){
+    } else if (!nextProps.blurChat) {
       this.refs.textarea.focus();
     }
   }
@@ -136,7 +136,7 @@ class ChatInput extends React.Component {
   }
 
   render() {
-    return (<div className="chat-input" style={this.state.mode === 'gif' ? { transform: 'translate3d(0,-100vh, 0'} : {}}>
+    return (<div className="chat-input" style={this.state.mode === 'gif' ? { transform: 'translate3d(0,-100vh, 0' } : {}}>
       <div className="chat-input--left">
         {this.renderActions()}
       </div>

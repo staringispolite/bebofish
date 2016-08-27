@@ -20,8 +20,9 @@ class App extends React.Component {
   componentWillMount() {
     Bebo.User.get('me', (err, resp) => {
       if (err) { return console.error(err); }
-      this.setState({actingUser: resp});
-    })
+      this.setState({ actingUser: resp });
+      return null;
+    });
   }
 
   blurInput() {
@@ -30,25 +31,23 @@ class App extends React.Component {
   }
 
   handleSwitchMode(mode) {
-    if(this.state.mode === 'gif'){
-      this.setState({mode: 'text'});
+    if (this.state.mode === 'gif') {
+      this.setState({ mode: 'text' });
     } else {
-      this.setState({mode});
+      this.setState({ mode });
     }
-
   }
-
 
   render() {
     return (<div className="chat">
-      <div className="chat-upper" style={this.state.mode === 'gif' ? {transform: `translate3d(33vw,0,0)`} : {}}>
+      <div className="chat-upper" style={this.state.mode === 'gif' ? { transform: 'translate3d(33vw,0,0)' } : {}}>
         <ChatList blurChat={this.blurInput} actingUser={this.state.actingUser} />
         <ChatBackground />
       </div>
-      <div className="chat-lower" style={this.state.mode === 'gif' ? {transform: `translate3d(33vw,0,0)`} : {}}>
+      <div className="chat-lower" style={this.state.mode === 'gif' ? { transform: 'translate3d(33vw,0,0)' } : {}}>
         <ChatInput blurChat={this.state.blurInput} switchMode={this.handleSwitchMode} setChatInputState={this.blurInput} />
       </div>
-      <GiphyBrowser actingUser={this.state.actingUser} style={this.state.mode === 'gif' ? {transform: `translate3d(0%,0,0)`} : {}} switchMode={this.handleSwitchMode} />
+      <GiphyBrowser actingUser={this.state.actingUser} style={this.state.mode === 'gif' ? { transform: 'translate3d(0%,0,0)' } : {}} switchMode={this.handleSwitchMode} />
     </div>);
   }
 }

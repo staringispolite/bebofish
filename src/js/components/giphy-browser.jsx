@@ -36,28 +36,33 @@ class GiphyBrowser extends React.Component {
     const { username, user_id } = this.props.actingUser;
     return (<div className="giphy-browser" style={this.props.style}>
       <Fetch url="http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC">
-        {({ data }) => data ? (
+        {({ data }) => (data ? (
           <div className="gif-list-container">
-            {data.data.map((gif, i) =><div className="gif-wrapper" key={i} onClick={() => {
-                const image = {
-                  preview: gif.images.downsized_still.url,
-                  url: gif.images.downsized_medium.url,
-                  width: gif.images.downsized_still.width,
-                  height: gif.images.downsized_still.height,
-              };
-              const message = {
-                image,
-                username,
-                user_id,
-                type: 'image',
-              };
-
-              Bebo.Db.save('messages', message, this.broadcastChat);
-
-              }}><img className="gif" role="presentation" src={gif.images.downsized.url}/></div>
+            {data.data.map((gif, i) =>
+              <div
+                className="gif-wrapper"
+                key={i}
+                onClick={() => {
+                  const image = {
+                    preview: gif.images.downsized_still.url,
+                    url: gif.images.downsized_medium.url,
+                    width: gif.images.downsized_still.width,
+                    height: gif.images.downsized_still.height,
+                  };
+                  const message = {
+                    image,
+                    username,
+                    user_id,
+                    type: 'image',
+                  };
+                  Bebo.Db.save('messages', message, this.broadcastChat);
+                }}
+              >
+                <img className="gif" role="presentation" src={gif.images.downsized.url} />
+              </div>
             )}
           </div>
-        ) : null }
+        ) : null)}
       </Fetch>
     </div>);
   }
@@ -69,6 +74,7 @@ GiphyBrowser.displayName = 'GiphyBrowser';
 GiphyBrowser.propTypes = {
   switchMode: React.PropTypes.func.isRequired,
   actingUser: React.PropTypes.object.isRequired,
+  style: React.PropTypes.object,
 };
 // GiphyBrowser.defaultProps = {};
 

@@ -1,10 +1,11 @@
-// require('../shared/error-reporter');
+/*eslint-disable */
 
+// require('../shared/error-reporter');
 
 var App = require('./app.jsx');
 
-document.addEventListener("DOMContentLoaded", function() {
-  Bebo.onReady(function() {
-    App.init()
+document.addEventListener('DOMContentLoaded', function () {
+  Bebo.onReady(function () {
+    App.init();
   });
 });

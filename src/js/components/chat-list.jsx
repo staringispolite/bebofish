@@ -108,7 +108,7 @@ class ChatList extends React.Component {
   }
   updatePresence() {
     const usersTypingCount = Object.keys(this.usersTyping).length;
-    this.setState({ usersTypingCount })
+    this.setState({ usersTypingCount });
   }
   scrollChatToBottom() {
     if (this.state.unloadedMessages.length > 0) {
@@ -152,7 +152,6 @@ class ChatList extends React.Component {
     return (<div className="chat-list--users-typing" style={count > 0 ? {} : { transform: 'translate3d(0,100%,0)' }}>
       <span className="chat-list--users-typing--text">{count === 1 ? '1 person is typing right now...' : `${count} people are typing right now...`}</span>
     </div>);
-
   }
 
   renderChatList() {
