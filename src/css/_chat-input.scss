@@ -1,0 +1,79 @@
+.chat-input {
+	width:100%;
+	display: flex;
+	flex-direction:rows;
+	justify-content:center;
+	align-items:center;
+	border-top:1px solid $chat-input-border;
+	background-color:$chat-input-bg;
+	// padding:12px 18px;
+
+}
+
+
+
+.chat-input--middle {
+	flex:1 1 auto;
+	padding:0 15px;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+.chat-input--right,
+.chat-input--left {
+	flex:0 0 auto;
+	padding: 14px 20px;
+}
+
+.chat-input--left {
+	// display:none;
+}
+
+// input
+.chat-input--middle input {
+	width:100%;
+	background-color:transparent;
+	border:none;
+	height:100%;
+	max-height:80px;
+	font-size:16px;
+	flex: 0 0 auto;
+	color: $chat-text;
+	line-height: $chat-text-line-height;
+
+	&::-webkit-input-placeholder {
+	 	color:$chat-input-placeholder;
+	}
+}
+
+
+.chat-input--send-btn {
+	pointer-events:none;
+	color:$chat-input-send;
+	padding:0;
+}
+
+.chat-input--send-btn:disabled {	
+	color:$chat-input-send-disbled;
+}
+
+
+// actions
+
+.chat-input--actions--item {
+	width:23px;
+	height:23px;
+	position: relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.chat-input--actions--item svg {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}

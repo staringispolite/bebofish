@@ -1,0 +1,86 @@
+@import "../shared/css/mixins";
+@import "../shared/css/reset";
+@import "../shared/css/loader";
+@import "../shared/css/colors";
+@import "../shared/css/ui-elements";
+@import "../shared/css/wireframe-colors";
+
+
+// reset buttons ?
+button {
+	background-color:transparent;
+	border:none;
+}
+
+
+
+
+// @import ".../shared/"
+
+//  Variables
+// ----------------------------------------------------------------------------------  //
+
+// Youtube style guide
+
+$text-dark: #2F2F2F;
+$text-light-grey: #BBBBBB;
+$border: #F0F0F0;
+$btn-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.17);
+$shadow: 0px 2px 8px 2px rgba(0, 0, 0, 0.17);
+
+
+// 
+$primary-color:#FF244D;
+
+
+// colors
+$chat-bg: #FFF;
+$chat-lower: $wf-gray-4;
+
+$chat-textarea-bg: $wf-gray-3;
+$chat-textarea-font-color: $wf-black;
+
+$chat-text: #000;
+$chat-text-line-height:1.6;
+
+$chat-avatar: $wf-gray-4;
+
+
+$chat-list-unseen-messages:$primary-color;
+
+
+$chat-input-border: #D1D1D1;
+$chat-input-bg: #FFF;
+$chat-input-send-disbled: #BABABA;
+$chat-input-send: $primary-color;
+
+
+$chat-input-placeholder:#A7A7A7;
+$chat-input-text:#000;
+
+
+$chat-text-size: 16px;
+$chat-input-size: 16px;
+
+//  Typograhpy
+// ----------------------------------------------------------------------------------  //
+
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:500);
+
+$font-text: 'San Francisco', 'Helvetica' , 'Roboto', 'open sans', sans-serif;
+$font-header:  'Work Sans','Open Sans','San Francisco','Roboto','Arial', sans-serif;
+
+
+
+// Componenents
+// ----------------------------------------------------------------------------------  //
+
+// Main 
+@import "./css/main";
+
+@import "./css/chat-input";
+@import "./css/chat-list";
+@import "./css/chat-item";
+
+
+

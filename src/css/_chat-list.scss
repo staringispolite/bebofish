@@ -1,0 +1,67 @@
+// The double nesting of lists hers is bevause if we ever wanted 
+//  to support Firefox on web well.
+.chat-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-list--inner {
+  padding: 10px;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chat-list--inner--list {
+  width: 100%;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// unseen messages
+.chat-list--unseen-messages {
+  width: 100%;
+  background-color: $chat-list-unseen-messages;
+  bottom: 0;
+  padding: 8px;
+  text-align: center;
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.chat-list--unseen-messages--text {
+  color: #FFF;
+  display: inline-block;
+  font-size: 15px;
+}
+
+// user typing
+
+.chat-list--user-typing {
+	width:100%;
+	text-align:left;
+	padding: 10px 0;
+}
+
+.chat-list--user-typing--text {
+	margin-left:5px;
+	display:inline-block;
+	color:#999999;
+	font-weight:400;
+	font-size:$font-text;
+}
+

@@ -1,0 +1,54 @@
+.inline-icon {
+  vertical-align: middle;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.contain-image {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.flex-center {
+  justify-content(center);
+  align-items(center);
+}
+
+.u-cover-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.u-right {
+  float: right;
+}
+
+.u-left {
+  float: left;
+}
+
+.u-clear {
+  clear: both;
+}
+
+.u-last {
+  margin-right: 0;
+}
+
+.no-overflow{
+  overflow-y: hidden!important;
+}
+
+/// text
+
+.u-bold {
+  font-weight: 600;
+}
+
+
+// transitions 
+
