@@ -1,5 +1,4 @@
 import React from 'react';
-import TextArea from 'react-autosize-textarea';
 
 
 class ChatInput extends React.Component {
@@ -12,6 +11,11 @@ class ChatInput extends React.Component {
       user: null,
     };
     this.handleInputFocus = this.handleInputFocus.bind(this);
+    this.handleInputBlur = this.handleInputBlur.bind(this);
+    this.blockEnterKey = this.blockEnterKey.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.stoppedTyping = this.stoppedTyping.bind(this);
+    this.resetTextarea = this.resetTextarea.bind(this);
   }
 
 
@@ -27,7 +31,6 @@ class ChatInput extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.refs);
     if (nextProps.blurChat) {
       this.refs.textarea.blur();
     } else if (!nextProps.blurChat){
@@ -42,7 +45,7 @@ class ChatInput extends React.Component {
 
   blockEnterKey(e) {
     if (e.keyCode === 13) {
-      return;
+      this.handleSendChat(e);
     }
   }
 
@@ -74,7 +77,6 @@ class ChatInput extends React.Component {
     e.preventDefault();
     const text = this.state.messageText.trim();
     if (text.length > 0) {
-      // Analytics.track2('chat', 'message', 'send');
       const message = {
         type: 'message',
         username: this.state.user.username,
@@ -89,7 +91,6 @@ class ChatInput extends React.Component {
       this.resetTextarea();
     } else {
       console.warn('no message, returning');
-      return;
     }
   }
   resetTextarea() {
@@ -107,7 +108,7 @@ class ChatInput extends React.Component {
       }
       return console.log('resp', resp); // an object containing success
     });
-    Bebo.emitEvent({ message });
+    Bebo.emitEvent({ message: m });
     // TODO check if any user is in str
   }
 
@@ -136,16 +137,14 @@ class ChatInput extends React.Component {
       </div>
       <div className="chat-input--middle">
         <input
-          type="email"
+          type="text"
           onFocus={this.handleInputFocus}
           onBlur={this.handleInputBlur}
           ref="textarea"
           placeholder="type a message.."
           onChange={this.handleInputChange}
+          value={this.state.messageText}
         />
-      </div>
-      <div onTouchStart={this.handleSendChat} className="chat-input--right">
-        <button disabled={!this.state.messageText.length} className="chat-input--send-btn">Send</button>
       </div>
     </div>);
   }

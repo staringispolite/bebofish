@@ -15,16 +15,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  top: 0;
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+  transition: all 200ms ease;
+  transform: translate3d(0,0,0);
 }
 
 .chat-list--inner--list {
   width: 100%;
-  position: relative;
-  min-height: 100vh;
+  max-height: 100vh;
+  position: absolute;
+  bottom: 0;
   display: flex;
   flex-direction: column;
 }
@@ -51,17 +53,23 @@
 
 // user typing
 
-.chat-list--user-typing {
-	width:100%;
-	text-align:left;
-	padding: 10px 0;
+.chat-list--users-typing {
+  width:100%;
+  text-align:center;
+  padding: 12px 0;
+  transition: all 200ms ease;
+  transform: translate3d(0,0,0);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
 }
 
-.chat-list--user-typing--text {
-	margin-left:5px;
-	display:inline-block;
-	color:#999999;
-	font-weight:400;
-	font-size:$font-text;
+.chat-list--users-typing--text {
+  margin-left:5px;
+  display:inline-block;
+  color:#999999;
+  font-weight:400;
+  font-size:13px;
 }
 

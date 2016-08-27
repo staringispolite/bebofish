@@ -9,6 +9,10 @@ class ChatItem extends React.Component {
       item: null,
       imageLoaded: false,
     };
+    this.handleImageLoaded = this.handleImageLoaded.bind(this);
+    this.renderAvatar = this.renderAvatar.bind(this);
+    this.renderTimestamp = this.renderTimestamp.bind(this);
+    this.renderContent = this.renderContent.bind(this);
   }
 
 
@@ -35,8 +39,7 @@ class ChatItem extends React.Component {
   }
 
   renderTimestamp() {
-    const d = moment(this.props.item.created_at).format('LT');
-    return d;
+    return moment(this.props.item.created_at).format('LT');
   }
 
   renderContent() {

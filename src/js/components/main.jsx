@@ -9,8 +9,16 @@ class App extends React.Component {
     super();
     this.state = {
       blurInput: true,
+      actingUser: {},
     };
     this.blurInput = this.blurInput.bind(this);
+  }
+
+  componentWillMount() {
+    Bebo.User.get('me', (err, resp) => {
+      if (err) { return console.error(err); }
+      this.setState({actingUser: resp});
+    })
   }
 
   blurInput() {
@@ -21,7 +29,7 @@ class App extends React.Component {
   render() {
     return (<div className="chat">
       <div className="chat-upper">
-        <ChatList blurChat={this.blurInput} />
+        <ChatList blurChat={this.blurInput} actingUser={this.state.actingUser} />
         <ChatBackground />
       </div>
       <div className="chat-lower">
