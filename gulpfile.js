@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var uglify = require('gulp-uglifyjs');
 var htmlmin = require('gulp-htmlmin');
 var cssmin = require('gulp-cssmin');
 var sass = require('gulp-sass');
@@ -10,13 +9,14 @@ var clean = require('gulp-clean');
 var path = require('path');
 var gutil = require('gulp-util');
 var autoprefixer = require('gulp-autoprefixer');
-var webpack = require("gulp-webpack");
+var webpack = require("webpack-stream");
 var watch = require("gulp-watch");
 var pump = require('pump');
 var webp = require('webpack');
 
 var argv = require('yargs').argv;
 var env = argv.e || "dev";
+
 var config = require('./config.js')(env);
 
 var folder = 'src';
@@ -40,27 +40,24 @@ var webpackConfig = {
       test: /\.css$/,
       loader: "style!css"
     }, {
-      test: /\.hbs$/,
-      loader: "handlebars-loader"
-    },
-      {
-        test: /\.handlebars$/,
-        loader: "handlebars-loader"
-      },
-      {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
-        //exclude: /node_modules/,
+        exclude: /node_modules/,
         query: {
           presets: ['es2015', 'react']
         }
       }]
   },
-  plugins: [
+  plugins: env === 'dev' ? [
+    new webp.optimize.DedupePlugin(),
+  ] : [
     new webp.optimize.DedupePlugin(),
     new webp.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
-    })
+    }),
+    new webp.optimize.UglifyJsPlugin(),
+    new webp.optimize.OccurenceOrderPlugin(),
+    new webp.optimize.AggressiveMergingPlugin(),
   ],
 };
 
@@ -96,7 +93,6 @@ gulp.task('minifyCss', ['build', 'sass'], function() {
 gulp.task('uglifyJS', ['build', 'webpack'], function() {
   pump([
     gulp.src(distJS),
-    uglify(),
     gulp.dest(folderDist)
   ]);
 });
