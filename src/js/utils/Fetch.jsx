@@ -1,6 +1,8 @@
 import React from 'react';
 import 'whatwg-fetch';
 
+let isMounted = false;
+
 class Fetch extends React.Component {
 
   constructor() {
@@ -9,7 +11,16 @@ class Fetch extends React.Component {
   }
 
   componentDidMount() {
-    fetch(this.props.url).then(res => res.json()).then(data => { this.setState({ data }); });
+    isMounted = true;
+    fetch(this.props.url).then(res => res.json()).then(data => {
+      if (isMounted) {
+        this.setState({ data });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    isMounted = false;
   }
 
   render() {

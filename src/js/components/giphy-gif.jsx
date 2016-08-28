@@ -29,14 +29,17 @@ class GiphyGif extends React.Component {
   render() {
     const { gif, actingUser, children, originalSize } = this.props;
     const { username, user_id } = actingUser;
+    const { url, webp } = gif.images.fixed_width_downsampled;
+    const gifUrl = Bebo.getDevice() === 'android' ? webp : url;
     return (<div
       className="gif-wrapper"
       onClick={this.props.onClick ? (this.props.onClick) : (() => {
         const image = {
           preview: gif.images.downsized_still.url,
-          url: gif.images.downsized_medium.url,
-          width: gif.images.downsized_medium.width,
-          height: gif.images.downsized_medium.height,
+          url: gif.images.fixed_width_downsampled.url,
+          webp: gif.images.fixed_width_downsampled.webp,
+          width: gif.images.fixed_width_downsampled.width,
+          height: gif.images.fixed_width_downsampled.height,
         };
         const message = {
           image,
@@ -48,9 +51,9 @@ class GiphyGif extends React.Component {
       })}
     >
       {originalSize ? (
-        <img className="gif" style={{ paddingTop: 0 }} role="presentation" src={gif.images.downsized.url} />
+        <img className="gif" style={{ paddingTop: 0 }} role="presentation" src={gifUrl} />
       ) : (
-        <div className="gif" style={{ backgroundImage: `url(${gif.images.downsized.url})` }} />
+        <div className="gif" style={{ backgroundImage: `url(${gifUrl})` }} />
       )}
 
       {children}

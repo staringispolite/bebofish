@@ -39,12 +39,12 @@ class App extends React.Component {
           this.setState({ closing: false });
         }, 333);
       });
-    } else {
+    }
+    if (this.state.mode === 'text' && mode !== 'text') {
       this.setState({ mode }, () => {
         setTimeout(() => {
           this.setState({ open: true });
         }, 0);
-
       });
     }
   }
