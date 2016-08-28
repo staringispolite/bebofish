@@ -46,7 +46,7 @@ class ChatItem extends React.Component {
     const { type, image } = this.props.item;
     if (type === 'image') {
       const { webp, url } = image;
-      const gifUrl = Bebo.getDevice() === 'android' ? webp : url;
+      const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
       return (<span className={`chat-item--inner--message--content ' ${this.state.imageLoaded ? 'is-loaded' : 'is-loading'}`}>
         <div className="chat-item--inner--message--content--image">
           <img onLoad={this.handleImageLoaded} src={gifUrl} role="presentation" />

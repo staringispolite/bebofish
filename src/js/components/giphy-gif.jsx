@@ -30,7 +30,7 @@ class GiphyGif extends React.Component {
     const { gif, actingUser, children, originalSize } = this.props;
     const { username, user_id } = actingUser;
     const { url, webp } = gif.images.fixed_width_downsampled;
-    const gifUrl = Bebo.getDevice() === 'android' ? webp : url;
+    const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
     return (<div
       className="gif-wrapper"
       onClick={this.props.onClick ? (this.props.onClick) : (() => {
