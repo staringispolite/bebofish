@@ -3,13 +3,14 @@
   "version": "0.9.1",
   "description": "chat room module for the bebo app",
   "homepage": "https://bebo.com",
-  "repository":  {
-    "type" : "git"
-  , "url" : "https://github.com/bebo-rooms/chat.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bebo-rooms/chat.git"
   },
   "dependencies": {
     "moment": "^2.14.1",
     "react": "^15.3.1",
+    "react-cluster": "^0.1.2",
     "react-dom": "^15.3.1",
     "request-promise": "^4.1.1",
     "whatwg-fetch": "^1.0.0"

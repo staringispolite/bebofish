@@ -6,16 +6,14 @@ class Fetch extends React.Component {
   constructor() {
     super();
     this.state = {};
-
   }
 
- componentDidMount() {
-   fetch(this.props.url).then(res => res.json()).then(data => {this.setState({data})})
- }
-
+  componentDidMount() {
+    fetch(this.props.url).then(res => res.json()).then(data => { this.setState({ data }); });
+  }
 
   render() {
-    return this.props.children(this.state);
+    return this.props.children(this.state.data || {});
   }
 }
 

@@ -9,4 +9,4 @@ const chat = {
   },
 };
 
-export default chat;
+module.exports = chat;

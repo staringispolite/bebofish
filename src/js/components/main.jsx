@@ -12,6 +12,8 @@ class App extends React.Component {
       blurInput: true,
       actingUser: {},
       mode: 'text',
+      open: false,
+      closing: false,
     };
     this.blurInput = this.blurInput.bind(this);
     this.handleSwitchMode = this.handleSwitchMode.bind(this);
@@ -32,22 +34,33 @@ class App extends React.Component {
 
   handleSwitchMode(mode) {
     if (this.state.mode === 'gif') {
-      this.setState({ mode: 'text' });
+      this.setState({ mode: 'text', closing: true, open: false }, () => {
+        setTimeout(() => {
+          this.setState({ closing: false });
+        }, 333);
+      });
     } else {
-      this.setState({ mode });
+      this.setState({ mode }, () => {
+        setTimeout(() => {
+          this.setState({ open: true });
+        }, 0);
+
+      });
     }
   }
 
   render() {
+    const giphyOpen = this.state.open === true;
+    const giphyClosing = this.state.closing === true;
     return (<div className="chat">
-      <div className="chat-upper" style={this.state.mode === 'gif' ? { transform: 'translate3d(33vw,0,0)' } : {}}>
+      <div className="chat-upper" style={this.state.mode === 'gif' ? { transform: 'translate3d(40vw,0,0)' } : {}}>
         <ChatList blurChat={this.blurInput} actingUser={this.state.actingUser} />
         <ChatBackground />
       </div>
-      <div className="chat-lower" style={this.state.mode === 'gif' ? { transform: 'translate3d(33vw,0,0)' } : {}}>
+      <div className="chat-lower" style={this.state.mode === 'gif' ? { transform: 'translate3d(40vw,0,0)' } : {}}>
         <ChatInput blurChat={this.state.blurInput} switchMode={this.handleSwitchMode} setChatInputState={this.blurInput} />
       </div>
-      <GiphyBrowser actingUser={this.state.actingUser} style={this.state.mode === 'gif' ? { transform: 'translate3d(0%,0,0)' } : {}} switchMode={this.handleSwitchMode} />
+      {(giphyOpen || giphyClosing || this.state.mode === 'gif' ) && <GiphyBrowser style={giphyOpen ? { transform: 'translate3d(0,0,0)' } : {}} actingUser={this.state.actingUser} switchMode={this.handleSwitchMode} />}
     </div>);
   }
 }
