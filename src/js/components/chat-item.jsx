@@ -45,11 +45,12 @@ class ChatItem extends React.Component {
   renderContent() {
     const { type, image } = this.props.item;
     if (type === 'image') {
-      const { webp, url } = image;
+      const { webp, url, width, height } = image;
+      const ratio = 120 / height;
       const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
       return (<span className={`chat-item--inner--message--content ' ${this.state.imageLoaded ? 'is-loaded' : 'is-loading'}`}>
         <div className="chat-item--inner--message--content--image">
-          <img onLoad={this.handleImageLoaded} src={gifUrl} role="presentation" />
+          <div style={{ backgroundImage: `url(${gifUrl})`, height: `${height * ratio}px`, width: `${width * ratio}px` }} />
         </div>
       </span>);
     }
