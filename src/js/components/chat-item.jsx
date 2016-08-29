@@ -50,7 +50,7 @@ class ChatItem extends React.Component {
       const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
       return (<span className={`chat-item--inner--message--content ' ${this.state.imageLoaded ? 'is-loaded' : 'is-loading'}`}>
         <div className="chat-item--inner--message--content--image">
-          <div style={{ backgroundImage: `url(${gifUrl})`, height: `${height * ratio}px`, width: `${width * ratio}px` }} />
+          <div style={{ backgroundImage: `url(${gifUrl.replace('http://', 'https://')})`, height: `${height * ratio}px`, width: `${width * ratio}px` }} />
         </div>
       </span>);
     }

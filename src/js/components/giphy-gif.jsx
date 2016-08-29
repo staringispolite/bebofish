@@ -51,9 +51,9 @@ class GiphyGif extends React.Component {
       })}
     >
       {originalSize ? (
-        <img className="gif" style={{ paddingTop: 0 }} role="presentation" src={gifUrl} />
+        <img className="gif" style={{ paddingTop: 0 }} role="presentation" src={gifUrl.replace('http://', 'https://')} />
       ) : (
-        <div className="gif" style={{ backgroundImage: `url(${gifUrl})` }} />
+        <div className="gif" style={{ backgroundImage: `url(${gifUrl.replace('http://', 'https://')})` }} />
       )}
 
       {children}
