@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 var gulp = require('gulp');
 var htmlmin = require('gulp-htmlmin');
 var cssmin = require('gulp-cssmin');
