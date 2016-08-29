@@ -211,7 +211,7 @@ class GiphyBrowser extends React.Component {
           ))}
         </Cluster>
       )}
-      <img className="giphy-attrib" src="/assets/img/powered_by_giphy.png" role="presentation" />
+      <img className="giphy-attrib" src="./assets/img/powered_by_giphy.png" role="presentation" />
     </div>);
   }
 }
