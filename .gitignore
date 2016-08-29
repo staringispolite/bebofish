@@ -8,3 +8,4 @@ node_modules
 awscli-bundle
 *.sass-cache*
 .DS_Store
+*.log

@@ -44,7 +44,7 @@ class App extends React.Component {
       this.setState({ mode }, () => {
         setTimeout(() => {
           this.setState({ open: true });
-        }, 0);
+        }, 5);
       });
     }
   }
@@ -60,7 +60,7 @@ class App extends React.Component {
       <div className="chat-lower" style={this.state.mode === 'gif' ? { transform: 'translate3d(40vw,0,0)' } : {}}>
         <ChatInput blurChat={this.state.blurInput} switchMode={this.handleSwitchMode} setChatInputState={this.blurInput} />
       </div>
-      {(giphyOpen || giphyClosing || this.state.mode === 'gif' ) && <GiphyBrowser style={giphyOpen ? { transform: 'translate3d(0,0,0)' } : {}} actingUser={this.state.actingUser} switchMode={this.handleSwitchMode} />}
+      {(giphyOpen || giphyClosing || this.state.mode === 'gif') && <GiphyBrowser style={giphyOpen ? { transform: 'translate3d(0,0,0)' } : {}} actingUser={this.state.actingUser} switchMode={this.handleSwitchMode} />}
     </div>);
   }
 }

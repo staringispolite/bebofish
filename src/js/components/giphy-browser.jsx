@@ -176,7 +176,14 @@ class GiphyBrowser extends React.Component {
             {({ data: list }) => (list ? (
               <div>{list.map((g, index) => <GiphyGif originalSize gif={g} key={index} switchMode={this.props.switchMode} actingUser={this.props.actingUser} />)}</div>
             ) : (
-              null
+              <div className="loader">
+                <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
+                  <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
+                  <circle className="circle2" fill="#fe1263" cx="31.5" cy="22.5" r="4.5" />
+                  <circle className="circle3" fill="#fe1263" cx="49.5" cy="22.5" r="4.5" />
+                  <circle className="circle4" fill="#fe1263" cx="67.5" cy="22.5" r="4.5" />
+                </svg>
+              </div>
             ))}
           </Fetch>
         </div>
@@ -191,7 +198,14 @@ class GiphyBrowser extends React.Component {
                   </div>
                 </GiphyGif>
               ) : (
-                null
+                <div className="loader">
+                  <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
+                    <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
+                    <circle className="circle2" fill="#fe1263" cx="31.5" cy="22.5" r="4.5" />
+                    <circle className="circle3" fill="#fe1263" cx="49.5" cy="22.5" r="4.5" />
+                    <circle className="circle4" fill="#fe1263" cx="67.5" cy="22.5" r="4.5" />
+                  </svg>
+                </div>
               ))}
             </Fetch>
           ))}

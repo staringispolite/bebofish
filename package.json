@@ -44,7 +44,11 @@
     "yargs": "^5.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp develop",
+    "dist": "gulp build --e prod",
+    "serve": "gulp develop",
+    "serve:dist": "gulp develop --e prod"
   },
   "author": "",
   "license": "ISC"
