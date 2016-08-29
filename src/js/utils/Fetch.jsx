@@ -12,7 +12,7 @@ class Fetch extends React.Component {
 
   componentDidMount() {
     isMounted = true;
-    fetch(this.props.url).then(res => res.json()).then(data => {
+    fetch(this.props.url.replace('http://', 'https://')).then(res => res.json()).then(data => {
       if (isMounted) {
         this.setState({ data });
       }
