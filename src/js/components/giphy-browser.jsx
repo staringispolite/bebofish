@@ -167,7 +167,7 @@ class GiphyBrowser extends React.Component {
     const { style } = this.props;
     return (<div className="giphy-browser" style={style}>
       <div className="giphy-nav-title" onClick={filter ? (() => { this.setState({ filter: null }); }) : (() => {})}>
-        {filter ? <button className="giphy-back"><img alt="back" src="/assets/img/icBack@3x.png" /></button> : null}
+        {filter ? <button className="giphy-back"><img alt="back" src="./assets/img/icBack@3x.png" /></button> : null}
         <div className="giphy-title" style={filter ? { marginRight: 0, paddingRight: '5px' } : {}}>{filter ? filter.q.replace(/\+/g, ' ') : 'Categories'}</div>
       </div>
       {filter ? (
