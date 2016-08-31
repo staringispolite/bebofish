@@ -54,6 +54,7 @@
 
 	document.addEventListener('DOMContentLoaded', function () {
 	  Bebo.onReady(function () {
+	    Bebo.UI.disableKeyboardDoneStrip();
 	    App.init();
 	  });
 	});
