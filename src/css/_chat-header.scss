@@ -1,0 +1,30 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+//CHAT HEADER
+
+.chat-header {
+	background-color: $color-brand;
+	height: calc-em(50px);
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: stretch;
+}
+
+.back-button {
+	padding: calc-em(13px) calc-em(18px);
+	img {
+		height: calc-em(24px);
+		width: calc-em(24px);
+	}
+}
+
+.chat-thread-name {
+	display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 700;
+  color: $color-white;
+  font-size: calc-em(18px);
+}
