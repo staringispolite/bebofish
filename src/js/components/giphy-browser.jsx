@@ -3,7 +3,7 @@ import GiphyGif from './giphy-gif.jsx';
 import SimpleFetch from 'react-simple-fetch';
 import Cluster from 'react-cluster';
 
-const loader = function loader(){
+const loader = function loader() {
   return (<div className="loader">
     <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
       <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
@@ -172,11 +172,18 @@ class GiphyBrowser extends React.Component {
         },
       ],
       filter: null,
+      height: 0,
     };
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ height: window.innerHeight });
+    }, 100);
+  }
+
   render() {
-    const { categories, filter } = this.state;
+    const { categories, filter, height } = this.state;
     const { style } = this.props;
     return (<div className="giphy-browser" style={style}>
       <div className="giphy-nav-title" onClick={filter ? (() => { this.setState({ filter: null }); }) : (() => {})}>
@@ -190,7 +197,7 @@ class GiphyBrowser extends React.Component {
           </SimpleFetch>
         </div>
       ) : (
-        <Cluster className="gif-list-container" height={window.innerHeight} rowHeight={(window.innerWidth * 0.4)}>
+        <Cluster className="gif-list-container" height={height || window.innerHeight} rowHeight={(window.innerWidth * 0.4)}>
           {categories.map((category, ind) => (
             <SimpleFetch key={ind} as="gif" path="data" url={`http://api.giphy.com/v1/gifs/${category.id}?api_key=dc6zaTOxFJmzC`}>
               <GiphyGif loader={loader()} onClick={() => { this.setState({ filter: category }); }} switchMode={this.props.switchMode} actingUser={this.props.actingUser}>
