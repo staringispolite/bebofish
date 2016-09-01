@@ -63,3 +63,50 @@ button {
   background-color:transparent;
   border:none;
 }
+
+.initial-load-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background: #FFFFFF;
+}
+
+.loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -50px;
+	margin-top: -50px;
+	width: 100px;
+	text-align: center;
+	font-size: 1.2em;
+	color: #555;
+}
+
+$delays: 0 125ms 250ms .375s;
+@for $i from 1 through 4 {
+	.circle#{$i} {
+		animation: bounce linear 2.2s infinite forwards;
+		animation-delay: nth($delays, $i);
+	}
+}
+
+@keyframes bounce {
+	0%, 100% {
+		transform: translateY(0);
+	}
+	20%, 50% {
+		transform: translateY(9px);
+	}
+	80% {
+		transform: translateY(2px)
+	}
+	40% {
+		transform: translateY(-15px);
+	}
+	60% {
+		transform: translateY(-7px);
+	}
+}
