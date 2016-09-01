@@ -1,7 +1,20 @@
 import React from 'react';
 import GiphyGif from './giphy-gif.jsx';
-import Fetch from '../utils/Fetch.jsx';
+import SimpleFetch from 'react-simple-fetch';
 import Cluster from 'react-cluster';
+
+const loader = function loader(){
+  return (<div className="loader">
+    <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
+      <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
+      <circle className="circle2" fill="#fe1263" cx="31.5" cy="22.5" r="4.5" />
+      <circle className="circle3" fill="#fe1263" cx="49.5" cy="22.5" r="4.5" />
+      <circle className="circle4" fill="#fe1263" cx="67.5" cy="22.5" r="4.5" />
+    </svg>
+  </div>);
+};
+
+loader.displayName = 'Loader';
 
 class GiphyBrowser extends React.Component {
 
@@ -172,43 +185,21 @@ class GiphyBrowser extends React.Component {
       </div>
       {filter ? (
         <div style={filter ? { position: 'absolute', top: 0, left: 0 } : {}} className={filter ? 'gif-list-container' : ''}>
-          <Fetch url={`http://api.giphy.com/v1/gifs/search?q=${filter.q}&api_key=dc6zaTOxFJmzC`}>
-            {({ data: list }) => (list ? (
-              <div>{list.map((g, index) => <GiphyGif originalSize gif={g} key={index} switchMode={this.props.switchMode} actingUser={this.props.actingUser} />)}</div>
-            ) : (
-              <div className="loader">
-                <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
-                  <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
-                  <circle className="circle2" fill="#fe1263" cx="31.5" cy="22.5" r="4.5" />
-                  <circle className="circle3" fill="#fe1263" cx="49.5" cy="22.5" r="4.5" />
-                  <circle className="circle4" fill="#fe1263" cx="67.5" cy="22.5" r="4.5" />
-                </svg>
-              </div>
-            ))}
-          </Fetch>
+          <SimpleFetch loader={loader()} as="gif" path="data" url={`http://api.giphy.com/v1/gifs/search?q=${filter.q}&api_key=dc6zaTOxFJmzC`}>
+            <GiphyGif originalSize switchMode={this.props.switchMode} actingUser={this.props.actingUser} />
+          </SimpleFetch>
         </div>
       ) : (
         <Cluster className="gif-list-container" height={window.innerHeight} rowHeight={(window.innerWidth * 0.4)}>
           {categories.map((category, ind) => (
-            <Fetch key={ind} url={`http://api.giphy.com/v1/gifs/${category.id}?api_key=dc6zaTOxFJmzC`}>
-              {({ data: gif }) => (gif ? (
-                <GiphyGif gif={gif} onClick={() => { this.setState({ filter: category }); }} switchMode={this.props.switchMode} actingUser={this.props.actingUser}>
-                  <div className="giphy-gif--category-background">
-                    <div className="giphy-gif--category-title">{category.q.replace(/\+/g, ' ')}</div>
-                  </div>
-                </GiphyGif>
-              ) : (
-                <div className="loader">
-                  <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
-                    <circle className="circle1" fill="#fe1263" cx="13.5" cy="22.5" r="4.5" />
-                    <circle className="circle2" fill="#fe1263" cx="31.5" cy="22.5" r="4.5" />
-                    <circle className="circle3" fill="#fe1263" cx="49.5" cy="22.5" r="4.5" />
-                    <circle className="circle4" fill="#fe1263" cx="67.5" cy="22.5" r="4.5" />
-                  </svg>
+            <SimpleFetch key={ind} as="gif" path="data" url={`http://api.giphy.com/v1/gifs/${category.id}?api_key=dc6zaTOxFJmzC`}>
+              <GiphyGif loader={loader()} onClick={() => { this.setState({ filter: category }); }} switchMode={this.props.switchMode} actingUser={this.props.actingUser}>
+                <div className="giphy-gif--category-background">
+                  <div className="giphy-gif--category-title">{category.q.replace(/\+/g, ' ')}</div>
                 </div>
-              ))}
-            </Fetch>
-          ))}
+              </GiphyGif>
+            </SimpleFetch>)
+          )}
         </Cluster>
       )}
       <img className="giphy-attrib" src="./assets/img/powered_by_giphy.png" role="presentation" />

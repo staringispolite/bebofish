@@ -8,10 +8,12 @@
     "url": "https://github.com/bebo-rooms/chat.git"
   },
   "dependencies": {
+    "deep-find": "0.0.0-alpha",
     "moment": "^2.14.1",
     "react": "^15.3.1",
     "react-cluster": "^0.1.2",
     "react-dom": "^15.3.1",
+    "react-simple-fetch": "^0.1.0",
     "request-promise": "^4.1.1",
     "whatwg-fetch": "^1.0.0"
   },

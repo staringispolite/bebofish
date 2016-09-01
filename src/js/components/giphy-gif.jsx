@@ -27,11 +27,12 @@ class GiphyGif extends React.Component {
 
 
   render() {
-    const { gif, actingUser, children, originalSize } = this.props;
+    const { gif, actingUser, children, originalSize, key } = this.props;
     const { username, user_id } = actingUser;
     const { url, webp } = gif.images.fixed_width_downsampled;
     const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
     return (<div
+      key={key || 0}
       className="gif-wrapper"
       onClick={this.props.onClick ? (this.props.onClick) : (() => {
         const image = {
@@ -55,7 +56,6 @@ class GiphyGif extends React.Component {
       ) : (
         <div className="gif" style={{ backgroundImage: `url(${gifUrl.replace('http://', 'https://')})` }} />
       )}
-
       {children}
     </div>);
   }
@@ -65,7 +65,7 @@ GiphyGif.displayName = 'GiphyGif';
 
 // Uncomment properties you need
 GiphyGif.propTypes = {
-  gif: React.PropTypes.object.isRequired,
+  gif: React.PropTypes.object,
   actingUser: React.PropTypes.object.isRequired,
   switchMode: React.PropTypes.func.isRequired,
   onClick: React.PropTypes.func,
