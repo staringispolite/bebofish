@@ -103,7 +103,7 @@ class ChatInput extends React.Component {
       return;
     }
     const m = data.result[0];
-    Bebo.Notification.broadcast('{{{user.username}}}:', m.message, { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }, (error, resp) => {
+    Bebo.Notification.roster('{{{user.username}}}:', m.message, { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }, (error, resp) => {
       if (error) {
         return console.log('error sending notification', error);
       }
