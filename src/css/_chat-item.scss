@@ -1,12 +1,12 @@
 .chat-item {
   width:100%;
   flex: 0 0 auto;
-  padding: 7px 0;
+  padding: calc-em(10px) 0;
 }
 
-.chat-item:first-child {
-  padding-top: 12vh;
-}
+// .chat-item:first-child {
+//   padding-top: 12vh;
+// }
 
 .chat-item--inner {
   width:100%;
@@ -24,6 +24,7 @@
   display: flex;
   position: relative;
   flex-direction:column;
+  padding-right: calc-em(10px);
 }
 
 .chat-item--inner--meta {
@@ -36,45 +37,50 @@
 
 .chat-item--inner--avatar {
   display:block;
-  width:11vw;
-  height:11vw;
-  background-color:#ECECEC;
-  margin: 0 10px;
-  border-radius:2vw;
+  width: calc-em(36px);
+  height: calc-em(36px);
+  background-color: $chat-avatar;
+  margin: 0 calc-em(13px);
+  border-radius: calc-em(8px);
   overflow:hidden;
+  img {
+    width: calc-em(36px);
+    height: calc-em(36px);
+  }
 }
 
 .chat-item--inner--meta--username {
   flex: 0 0 auto;
-  font-weight:600;
-  font-family: $font-text;
-  color:#000;
+  font-weight: 600;
+  color: $color-dark-grey;
 }
 
 .chat-item--inner--meta--time {
+  @extend .font-size-small;
+  font-family: $chat-family;
   flex: 0 0 auto;
-  font-size:13px;
-  font-weight:300;
-  margin-left:5px;
-  color:#A8A8AF;
+  font-weight: 400;
+  margin-left: calc-em(5px);
+  color: $color-medium-grey;
+  position: relative;
+  top: -2px;
 }
 
 .chat-item--inner--message {
   width:100%;
   flex: 0 0 auto;
   padding:0;
-  margin-top:4px;
-  font-weight:400;
+  margin-top: calc-em(1px);
 }
 
 .chat-item--inner--message--content {
-  font-size:$chat-input-size;
-  color:$chat-text;
-  font-family: $font-text;
-  line-height: $chat-text-line-height;
+  @extend .font-size-default;
+  color:$color-dark-grey;
+  font-family: $chat-family;
   width:100%;
   position:relative;
   word-wrap: break-word;
+  line-height: 1;
 }
 
 
