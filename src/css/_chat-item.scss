@@ -5,6 +5,9 @@
   width:100%;
   flex: 0 0 auto;
   padding: calc-em(10px) 0;
+  &:last-child{
+    padding-bottom: calc-em(10px)!important;
+  }
 }
 
 // .chat-item:first-child {
@@ -49,6 +52,8 @@
   img {
     width: calc-em(36px);
     height: calc-em(36px);
+    object-fit: cover;
+    object-position: center;
   }
 }
 

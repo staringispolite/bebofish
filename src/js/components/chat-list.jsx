@@ -39,6 +39,15 @@ class ChatList extends React.Component {
     Bebo.onEvent(this.handleEventUpdate);
   }
 
+  componentWillUnmount() {
+    if(this.presenceTimeout) {
+      clearTimeout(this.presenceTimeout);
+    }
+    if(this.presenceInterval) {
+      clearInterval(this.presenceInterval);
+    }
+  }
+
   getOldMessages() {
     // eslint-disable-next-line
     Bebo.Db.get('messages', { count: 50 }, (err, data) => {
@@ -65,9 +74,10 @@ class ChatList extends React.Component {
   }
 
   handleEventUpdate(data) {
-    if (data.message) {
+    if (data.type === 'chat_sent') {
       this.handleMessageEvent(data.message);
-    } else if (data.presence) {
+    }
+    if (data.type === 'chat_presence') {
       this.handlePresenceUpdates(data.presence);
     }
   }
@@ -96,6 +106,14 @@ class ChatList extends React.Component {
     if (user.started_typing === this.props.actingUser.user_id || user.stopped_typing === this.props.actingUser.user_id) {
       return;
     }
+    if(this.presenceTimeout) {
+      clearTimeout(this.presenceTimeout);
+    }
+    this.presenceTimeout = setTimeout(() => {
+      if(this.presenceInterval) {
+        clearInterval(this.presenceInterval);
+      }
+    }, 4000);
 
     if (user.started_typing) {
       this.usersTyping[user.started_typing] = Date.now();
@@ -111,6 +129,9 @@ class ChatList extends React.Component {
   }
   updatePresence() {
     const usersTypingCount = Object.keys(this.usersTyping).length;
+    if(usersTypingCount === 0) {
+      clearInterval(this.presenceInterval);
+    }
     this.setState({ usersTypingCount });
   }
   scrollChatToBottom() {
@@ -158,9 +179,10 @@ class ChatList extends React.Component {
   }
 
   renderChatList() {
-    if (this.state.messages && this.state.messages.length > 0) {
+    const { messages } = this.state;
+    if (messages && messages.length) {
       return (<ul ref="chats" className="chat-list--inner--list">
-        {this.state.messages.map((i) => <ChatItem handleNewMessage={this.handleNewMessage} item={i} key={i.id} />)}
+        {messages.map((item, i) => <ChatItem handleNewMessage={this.handleNewMessage} item={item} prevItem={messages[i - 1] || {}} key={item.id} />)}
       </ul>);
     }
     return (<ul className="chat-list--inner--list">

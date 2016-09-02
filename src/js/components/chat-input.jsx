@@ -59,7 +59,7 @@ class ChatInput extends React.Component {
       Bebo.emitEvent({ presence: { started_typing: this.state.user.user_id } });
       this.typingInterval = setInterval(() => {
         // eslint-disable-next-line
-        Bebo.emitEvent({ presence: { started_typing: this.state.user.user_id } });
+        Bebo.emitEvent({ type: 'chat_presence', presence: { started_typing: this.state.user.user_id } });
       }, 3000);
     }
     this.isTypingTimeout = setTimeout(this.stoppedTyping, 3000);
@@ -73,7 +73,7 @@ class ChatInput extends React.Component {
   stoppedTyping() {
     clearInterval(this.typingInterval);
     // eslint-disable-next-line
-    Bebo.emitEvent({ presence: { stopped_typing: this.state.user.user_id } });
+    Bebo.emitEvent({ type: 'chat_presence', presence: { stopped_typing: this.state.user.user_id } });
     this.setState({ isTyping: false });
   }
 
@@ -116,7 +116,8 @@ class ChatInput extends React.Component {
       return console.log('resp', resp); // an object containing success
     });
     // eslint-disable-next-line
-    Bebo.emitEvent({ message: m });
+    Bebo.emitEvent({ type: 'chat_sent', message: m });
+    this.stoppedTyping();
     // TODO check if any user is in str
   }
 
