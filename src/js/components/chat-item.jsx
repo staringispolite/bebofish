@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+import '../../css/_chat-item.scss';
+
 class ChatItem extends React.Component {
 
   constructor() {
@@ -33,8 +35,10 @@ class ChatItem extends React.Component {
   }
 
   renderAvatar() {
+    // eslint-disable-next-line
+    const url = `${Bebo.getImageUrl()}image/user/${this.state.item.user_id}`;
     return (<div className="ui-avatar">
-      <img src={`${Bebo.getImageUrl()}image/user/${this.state.item.user_id}`} role="presentation" />
+      <img src={url} role="presentation" />
     </div>);
   }
 
@@ -47,6 +51,7 @@ class ChatItem extends React.Component {
     if (type === 'image') {
       const { webp, url, width, height } = image;
       const ratio = 120 / height;
+      // eslint-disable-next-line
       const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
       return (<span className={`chat-item--inner--message--content ' ${this.state.imageLoaded ? 'is-loaded' : 'is-loading'}`}>
         <div className="chat-item--inner--message--content--image">

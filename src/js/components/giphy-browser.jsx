@@ -3,6 +3,8 @@ import GiphyGif from './giphy-gif.jsx';
 import SimpleFetch from 'react-simple-fetch';
 import Cluster from 'react-cluster';
 
+import '../../css/_giphy-browser.scss';
+
 const loader = function loader() {
   return (<div className="loader">
     <svg version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 81 45" >
@@ -13,6 +15,9 @@ const loader = function loader() {
     </svg>
   </div>);
 };
+
+import backButton from '../../assets/img/icBack@3x.png';
+import giphyAtttrib from '../../assets/img/powered_by_giphy.png';
 
 loader.displayName = 'Loader';
 
@@ -187,7 +192,7 @@ class GiphyBrowser extends React.Component {
     const { style } = this.props;
     return (<div className="giphy-browser" style={style}>
       <div className="giphy-nav-title" onClick={filter ? (() => { this.setState({ filter: null }); }) : (() => {})}>
-        {filter ? <button className="giphy-back"><img alt="back" src="./assets/img/icBack@3x.png" /></button> : null}
+        {filter ? <button className="giphy-back"><img alt="back" src={backButton} /></button> : null}
         <div className="giphy-title" style={filter ? { marginRight: 0, paddingRight: '5px' } : {}}>{filter ? filter.q.replace(/\+/g, ' ') : 'Categories'}</div>
       </div>
       {filter ? (
@@ -209,7 +214,7 @@ class GiphyBrowser extends React.Component {
           )}
         </Cluster>
       )}
-      <img className="giphy-attrib" src="./assets/img/powered_by_giphy.png" role="presentation" />
+      <img className="giphy-attrib" src={giphyAtttrib} role="presentation" />
     </div>);
   }
 }

@@ -14,12 +14,14 @@ class GiphyGif extends React.Component {
       return;
     }
     const m = data.result[0];
+    // eslint-disable-next-line
     Bebo.Notification.broadcast('{{{user.username}}}', ' just posted a GIF', { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }, (error, resp) => {
       if (error) {
         return console.log('error sending notification', error);
       }
       return console.log('resp', resp); // an object containing success
     });
+    // eslint-disable-next-line
     Bebo.emitEvent({ message: m });
 
     this.props.switchMode('text');
@@ -30,6 +32,7 @@ class GiphyGif extends React.Component {
     const { gif, actingUser, children, originalSize, key } = this.props;
     const { username, user_id } = actingUser;
     const { url, webp } = gif.images.fixed_width_downsampled;
+    // eslint-disable-next-line
     const gifUrl = Bebo.getDevice() === 'android' ? webp || url : url;
     return (<div
       key={key || 0}
@@ -48,6 +51,7 @@ class GiphyGif extends React.Component {
           user_id,
           type: 'image',
         };
+        // eslint-disable-next-line
         Bebo.Db.save('messages', message, this.broadcastChat);
       })}
     >

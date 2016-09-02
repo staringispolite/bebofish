@@ -1,3 +1,5 @@
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 # chat
 
 ### to run locally
@@ -11,4 +13,4 @@
 
 1. clone
 2. npm install
-3. npm run dist
+3. npm run build

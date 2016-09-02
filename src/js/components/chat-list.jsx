@@ -1,6 +1,7 @@
 import React from 'react';
 import ChatItem from './chat-item.jsx';
 
+import '../../css/_chat-list.scss';
 
 class ChatList extends React.Component {
 
@@ -34,10 +35,12 @@ class ChatList extends React.Component {
 
   componentWillMount() {
     this.getOldMessages();
+    // eslint-disable-next-line
     Bebo.onEvent(this.handleEventUpdate);
   }
 
   getOldMessages() {
+    // eslint-disable-next-line
     Bebo.Db.get('messages', { count: 50 }, (err, data) => {
       if (err) {
         console.log('error getting list');

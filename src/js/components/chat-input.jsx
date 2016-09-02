@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../css/_chat-input.scss'
 
 
 class ChatInput extends React.Component {
@@ -21,7 +22,7 @@ class ChatInput extends React.Component {
 
 
   componentWillMount() {
-    // do a get on -> http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzCZ
+    // eslint-disable-next-line
     Bebo.User.getUser('me', (err, data) => {
       this.setState({ user: data });
     });
@@ -54,8 +55,10 @@ class ChatInput extends React.Component {
     clearTimeout(this.isTypingTimeout);
     if (!this.state.isTyping) {
       this.setState({ isTyping: true });
+      // eslint-disable-next-line
       Bebo.emitEvent({ presence: { started_typing: this.state.user.user_id } });
       this.typingInterval = setInterval(() => {
+        // eslint-disable-next-line
         Bebo.emitEvent({ presence: { started_typing: this.state.user.user_id } });
       }, 3000);
     }
@@ -69,6 +72,7 @@ class ChatInput extends React.Component {
 
   stoppedTyping() {
     clearInterval(this.typingInterval);
+    // eslint-disable-next-line
     Bebo.emitEvent({ presence: { stopped_typing: this.state.user.user_id } });
     this.setState({ isTyping: false });
   }
@@ -87,7 +91,7 @@ class ChatInput extends React.Component {
       };
 
       // TODO mention stuff in users[]
-
+      // eslint-disable-next-line
       Bebo.Db.save('messages', message, this.broadcastChat);
       this.resetTextarea();
     } else {
@@ -104,12 +108,14 @@ class ChatInput extends React.Component {
     }
     const m = data.result[0];
     // { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }
+    // eslint-disable-next-line
     Bebo.Notification.roster('{{{user.username}}}:', m.message, {}, (error, resp) => {
       if (error) {
         return console.log('error sending notification', error);
       }
       return console.log('resp', resp); // an object containing success
     });
+    // eslint-disable-next-line
     Bebo.emitEvent({ message: m });
     // TODO check if any user is in str
   }

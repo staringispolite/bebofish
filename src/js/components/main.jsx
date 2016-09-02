@@ -4,6 +4,8 @@ import ChatBackground from './chat-background.jsx';
 import ChatInput from './chat-input.jsx';
 import GiphyBrowser from './giphy-browser.jsx';
 
+import '../../css/_main.scss';
+
 class App extends React.Component {
 
   constructor() {
@@ -20,6 +22,7 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    // eslint-disable-next-line
     Bebo.User.get('me', (err, resp) => {
       if (err) { return console.error(err); }
       this.setState({ actingUser: resp });
