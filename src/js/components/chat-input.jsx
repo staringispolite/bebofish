@@ -18,6 +18,7 @@ class ChatInput extends React.Component {
     this.stoppedTyping = this.stoppedTyping.bind(this);
     this.resetTextarea = this.resetTextarea.bind(this);
     this.handleActionGIF = this.handleActionGIF.bind(this);
+    this.broadcastChat = this.broadcastChat.bind(this);
   }
 
 
