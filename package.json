@@ -52,6 +52,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.13.2",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "1.15.1",
     "whatwg-fetch": "1.0.0"
   },
@@ -65,6 +66,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "dashboard": "webpack-dashboard -- node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "jest --watch --env=jsdom"
   },

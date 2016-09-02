@@ -6,6 +6,7 @@ var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var WatchMissingNodeModulesPlugin = require('../scripts/utils/WatchMissingNodeModulesPlugin');
 var paths = require('./paths');
 var env = require('./env');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
@@ -174,6 +175,7 @@ module.exports = {
       template: paths.appHtml,
       version: Date.now()
     }),
+    new DashboardPlugin(),
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `env.js`.
     new webpack.DefinePlugin(env),
