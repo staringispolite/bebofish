@@ -5,6 +5,7 @@ import './index.scss';
 import './css/libs/reset.scss';
 // eslint-disable-next-line
 Bebo.onReady(() => {
+
   ReactDOM.render(
     <App />,
     document.getElementById('root')
