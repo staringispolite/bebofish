@@ -5,7 +5,8 @@ import './index.scss';
 import './css/libs/reset.scss';
 // eslint-disable-next-line
 Bebo.onReady(() => {
-
+// eslint-disable-next-line
+  Bebo.UI.disableKeyboardDoneStrip();
   ReactDOM.render(
     <App />,
     document.getElementById('root')

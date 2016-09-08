@@ -19,6 +19,7 @@ class ChatInput extends React.Component {
     this.resetTextarea = this.resetTextarea.bind(this);
     this.handleActionGIF = this.handleActionGIF.bind(this);
     this.broadcastChat = this.broadcastChat.bind(this);
+    this.handleSendChat = this.handleSendChat.bind(this);
   }
 
 
@@ -47,8 +48,10 @@ class ChatInput extends React.Component {
   }
 
   blockEnterKey(e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && this.state.messageText && this.state.messageText.length) {
       this.handleSendChat(e);
+    } else if(e.keyCode === 13) {
+      this.refs.textarea.blur();
     }
   }
 
@@ -80,7 +83,10 @@ class ChatInput extends React.Component {
 
 
   handleSendChat(e) {
-    e.preventDefault();
+    //this.refs.textarea.focus();
+    if(e){
+      e.preventDefault();
+    }
     const text = this.state.messageText.trim();
     if (text.length > 0) {
       const message = {
@@ -123,15 +129,24 @@ class ChatInput extends React.Component {
   }
 
   handleInputFocus() {
+    this.setState({isFocussed: true});
     this.props.setChatInputState(true);
   }
 
   handleInputBlur() {
+    this.setState({isFocussed: false});
     this.props.setChatInputState(false);
   }
 
   handleActionGIF() {
     this.props.switchMode('gif');
+  }
+
+  calculateSendBtnStyle() {
+    if(this.state.messageText.length) {
+      return {transform: 'translateX(0)'}
+    }
+    return {}
   }
 
   renderActions() {
@@ -159,6 +174,9 @@ class ChatInput extends React.Component {
           onChange={this.handleInputChange}
           value={this.state.messageText}
         />
+        <div onTouchStart={this.handleSendChat} className="send-button" style={this.calculateSendBtnStyle()}>
+          <span>Send</span>
+        </div>
       </div>
     </div>);
   }

@@ -31,6 +31,22 @@
   justify-content:center;
 }
 
+.send-button {
+  position: absolute;
+  right: 0;
+  transform: translateX(100%);
+  transition: all 200ms ease;
+  top: 0;
+  bottom: 0;
+  padding: 0 15px;
+  display: flex;
+  span {
+    margin: auto;
+    color: #FC5287;
+    font-weight: 700;
+  }
+}
+
 .chat-input--right,
 .chat-input--left {
   flex:0 0 auto;
@@ -52,7 +68,7 @@
   padding: 0.2em 0 0.3em;
   color: $color-dark-grey;
   line-height: 1;
-
+  padding-right: 40px;
   &::-webkit-input-placeholder {
     color:$color-grey;
   }

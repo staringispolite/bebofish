@@ -23,8 +23,6 @@ class App extends React.Component {
 
   componentWillMount() {
     // eslint-disable-next-line
-    Bebo.UI.disableKeyboardDoneStrip();
-    // eslint-disable-next-line
     Bebo.User.get('me', (err, resp) => {
       if (err) { return console.error(err); }
       this.setState({ actingUser: resp });
