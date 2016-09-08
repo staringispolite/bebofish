@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import Linkify from 'react-linkify';
 
 import '../../css/_chat-item.scss';
 
@@ -32,6 +33,12 @@ class ChatItem extends React.Component {
 
   handleImageLoaded() {
     this.setState({ imageLoaded: true });
+  }
+
+  handleLinkClick(e) {
+    e.preventDefault();
+    // eslint-disable-next-line
+    Bebo.openURI(e.target.href);
   }
 
   renderAvatar() {
@@ -69,7 +76,7 @@ class ChatItem extends React.Component {
         </div>
       </span>);
     }
-    return <span className="chat-item--inner--message--content">{this.props.item.message}</span>;
+    return <Linkify properties={{onClick: this.handleLinkClick}} className="chat-item--inner--message--content">{this.props.item.message}</Linkify>;
   }
 
   render() {
