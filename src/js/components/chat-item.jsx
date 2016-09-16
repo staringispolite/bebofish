@@ -41,9 +41,9 @@ class ChatItem extends React.Component {
     Bebo.openURI(e.target.href);
   }
 
-  renderAvatar() {
-    const { prevItem, item } = this.props;
-    if (item.type !== 'image' && prevItem.user_id === item.user_id) {
+  renderAvatar(isRepeat) {
+    const { item } = this.props;
+    if (isRepeat) {
       return null;
     }
     const pixelRatio = window.devicePixelRatio;
@@ -55,15 +55,15 @@ class ChatItem extends React.Component {
     </div>);
   }
 
-  renderTimestamp() {
-    const { prevItem, item } = this.props;
-    if (item.type !== 'image' && prevItem.user_id === item.user_id) {
+  renderTimestamp(isRepeat) {
+    const { item } = this.props;
+    if (isRepeat) {
       return null;
     }
     return moment(item.created_at).format('LT');
   }
 
-  renderContent() {
+  renderContent(isRepeat) {
     const { type, image } = this.props.item;
     if (type === 'image') {
       const { webp, url, width, height } = image;
@@ -81,23 +81,23 @@ class ChatItem extends React.Component {
 
   render() {
     const { prevItem, item } = this.props;
-    const isRepeat = (item.type !== 'image' && prevItem.user_id === item.user_id && (item.created_at-prevItem.created_at) > 60*5*1000 );
+    const isRepeat = (item.type !== 'image' && prevItem.user_id === item.user_id) && ((item.created_at-prevItem.created_at) < 60*60*1000);
     return (<li className="chat-item" style={isRepeat ? { padding: 0 } : {}}>
       <div className="chat-item--inner">
         <div className="chat-item--inner--left">
           <div className="chat-item--inner--avatar" style={isRepeat ? { visibility: 'hidden', height: 'auto' } : {}}>
-            {this.renderAvatar()}
+            {this.renderAvatar(isRepeat)}
           </div>
         </div>
         <div className="chat-item--inner--right">
           <div className="chat-item--inner--meta">
             <span style={isRepeat ? { display: 'none' } : {}} className="chat-item--inner--meta--username">{this.props.item.username}</span>
             <span style={isRepeat ? { display: 'none' } : {}} className="chat-item--inner--meta--time">
-              {this.renderTimestamp()}
+              {this.renderTimestamp(isRepeat)}
             </span>
           </div>
           <div className="chat-item--inner--message" style={isRepeat ? { margin: 0 } : {}}>
-            {this.renderContent()}
+            {this.renderContent(isRepeat)}
           </div>
         </div>
       </div>

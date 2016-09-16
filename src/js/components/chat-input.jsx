@@ -116,7 +116,7 @@ class ChatInput extends React.Component {
     const m = data.result[0];
     // { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }
     // eslint-disable-next-line
-    Bebo.Notification.roster('{{{user.username}}}:', m.message, {}, (error, resp) => {
+    Bebo.Notification.roster('{{{user.username}}}:', m.message, [], (error, resp) => {
       if (error) {
         return console.log('error sending notification', error);
       }

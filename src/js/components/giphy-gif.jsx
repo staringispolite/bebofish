@@ -15,14 +15,14 @@ class GiphyGif extends React.Component {
     }
     const m = data.result[0];
     // eslint-disable-next-line
-    Bebo.Notification.broadcast('{{{user.username}}}', ' just posted a GIF', { rate_limit_key: `${m.user_id}_${Math.floor(Date.now() / 1000 / 60 / 60)}` }, (error, resp) => {
+    Bebo.Notification.roster('{{{user.username}}}', ' just posted a GIF', [], (error, resp) => {
       if (error) {
         return console.log('error sending notification', error);
       }
       return console.log('resp', resp); // an object containing success
     });
     // eslint-disable-next-line
-    Bebo.emitEvent({ message: m });
+    Bebo.emitEvent({ type: 'chat_sent', message: m });
 
     this.props.switchMode('text');
   }
