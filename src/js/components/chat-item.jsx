@@ -81,7 +81,7 @@ class ChatItem extends React.Component {
 
   render() {
     const { prevItem, item } = this.props;
-    const isRepeat = (item.type !== 'image' && prevItem.user_id === item.user_id);
+    const isRepeat = (item.type !== 'image' && prevItem.user_id === item.user_id && (item.created_at-prevItem.created_at) > 60*5*1000 );
     return (<li className="chat-item" style={isRepeat ? { padding: 0 } : {}}>
       <div className="chat-item--inner">
         <div className="chat-item--inner--left">
