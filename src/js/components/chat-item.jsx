@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Linkify from 'react-linkify';
+import Linkify from '../utils/better-linkify';
 
 import '../../css/_chat-item.scss';
 
