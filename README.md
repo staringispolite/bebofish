@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Bebofish - Universal Live Translation for Bebo chat
 
-![Image of translation in action](http://i.imgur.com/QGEQ80h.jpg)
+![Image of translation in action](http://i.imgur.com/E14PPI3.jpg)
 
 ### to run a dev Bebofish chat room locally
 
