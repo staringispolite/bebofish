@@ -16,6 +16,12 @@ class ChatList extends React.Component {
       usersTypingCount: 0,
     };
     this.usersTyping = {};
+    this.emojiFlagsByLangCode = {
+      'en': 'en',
+      'de': 'de',
+      'fr': 'fr',
+      'es': 'es'
+    };
 
     this.getOldMessages = this.getOldMessages.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -94,6 +100,7 @@ class ChatList extends React.Component {
 
   // Calls callback(translatedMessage)
   translateMessage(message, callback) {
+    var _this = this;
     // Google Translate logic here
     var APIkey = 'AIzaSyBuQYwgfhjtnRSD2U90DSbWMwYwkWPfJ4U';
 
@@ -118,7 +125,8 @@ class ChatList extends React.Component {
       message.message = "";
       if ((response.data.translations[0].detectedSourceLanguage !== undefined) && 
           (response.data.translations[0].detectedSourceLanguage !== toLang)) {
-        message.message = "(" + response.data.translations[0].detectedSourceLanguage + ") ";
+        var emojiFlag= _this.emojiFlagsByLangCode[response.data.translations[0].detectedSourceLanguage];
+        message.message = "(" + emojiFlag + ") ";
       }
       message.message += response.data.translations[0].translatedText;
       message.detectedSourceLanguage = response.data.translations[0].detectedSourceLanguage;
@@ -126,7 +134,8 @@ class ChatList extends React.Component {
 
       // Success!
       callback(message);
-    }).catch(function() {
+    }).catch(function(err) {
+      console.error(err);
       console.log("Booo");
     });
   }
