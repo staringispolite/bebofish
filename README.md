@@ -4,17 +4,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![Image of translation in action](http://i.imgur.com/E14PPI3.jpg)
 
-### to run a dev Bebofish chat room locally
+### To run a dev Bebofish chat room locally:
 
 #### Google Translate
 1. Get your own Google Translate API key. [Their trial is $300 free for 60 days.](https://cloud.google.com/translate/)
 2. Replace my (now stale) API key with yours [here](https://github.com/staringispolite/bebofish/blob/master/src/js/components/chat-list.jsx#L161)
 
 #### Run a dev server for your 'room'
-1. clone this repo
+1. Fork this repo & clone to your dev machine
 2. `npm install` (if you don't have npm => `brew install node` on mac)
 3. `npm start`
-4. check you've got the 'four dots' loading screen at `http://localhost:3000` on a browser
+4. Check you've got the 'four dots' loading screen at `http://localhost:3000` on a browser
 
 #### Add the room to your Bebo group
 1. Download the Bebo app
