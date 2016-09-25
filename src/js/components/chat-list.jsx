@@ -19,6 +19,7 @@ class ChatList extends React.Component {
 
     this.getOldMessages = this.getOldMessages.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.translateMessage = this.translateMessage.bind(this);
     this.handleEventUpdate = this.handleEventUpdate.bind(this);
     this.handleMessageEvent = this.handleMessageEvent.bind(this);
     this.addNewMessages = this.addNewMessages.bind(this);
@@ -56,6 +57,15 @@ class ChatList extends React.Component {
         return;
       }
       const list = data.result.reverse();
+      // Save the object's this state for use in the callback.
+      var _this = this;
+      // Loop through and translate all messages.
+      for (var i = 0; i < list.length; i++) {
+        this.translateMessage(list[i], function(translatedMessage) {
+          list[i].message = translatedMessage.message;
+          _this.setState({ messages: list });
+        });
+      }
       this.setState({ messages: list });
     });
   }
@@ -82,14 +92,65 @@ class ChatList extends React.Component {
     }
   }
 
+  // Calls callback(translatedMessage)
+  translateMessage(message, callback) {
+    // Google Translate logic here
+    var APIkey = 'AIzaSyBuQYwgfhjtnRSD2U90DSbWMwYwkWPfJ4U';
+
+    // Build API call URL.
+    var fromLang = undefined;
+    // var toLang = 'de';
+    var toLang = navigator.language.split('-')[0];
+    var URL = 'https://www.googleapis.com/language/translate/v2?key=' +
+      APIkey + '&q=' + encodeURIComponent(message.message); 
+    if (fromLang !== undefined) {
+      URL += '&source=' + fromLang;
+    }
+    URL += '&target=' + toLang;
+
+    // AJAX to Google Translate
+    fetch(URL).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      // Overwrite client-side message with translated one.
+      //console.log("overwriting '" + message.message + "' with '" + response.data.translations[0].translatedText + "'");
+      message.message = response.data.translations[0].translatedText;
+      console.log(response.data);
+
+      // Success!
+      callback(message);
+    }).catch(function() {
+      console.log("Booo");
+    });
+  }
+
   handleMessageEvent(message) {
-    if (!this.state.scrolledPastFirstMessage) {
-      this.addNewMessages([message]);
-      if (message.user_id === this.props.actingUser.user_id) { this.scrollChatToBottom(); }
+    var _this = this;
+    // Only translate messages that aren't yours.
+    if (message.user_id !== this.props.actingUser.user_id) {
+      this.translateMessage(message, function(translatedMessage) {
+        if (!_this.state.scrolledPastFirstMessage) {
+          _this.addNewMessages([message]);
+          if (message.user_id === _this.props.actingUser.user_id) {
+            _this.scrollChatToBottom();
+          }
+        } else {
+          const messages = _this.state.unloadedMessages;
+          messages.push(message);
+          _this.setState({ unloadedMessages: messages });
+        }
+      });
     } else {
-      const messages = this.state.unloadedMessages;
-      messages.push(message);
-      this.setState({ unloadedMessages: messages });
+      if (!_this.state.scrolledPastFirstMessage) {
+        _this.addNewMessages([message]);
+        if (message.user_id === _this.props.actingUser.user_id) {
+          _this.scrollChatToBottom();
+        }
+      } else {
+        const messages = _this.state.unloadedMessages;
+        messages.push(message);
+        _this.setState({ unloadedMessages: messages });
+      }
     }
   }
 
