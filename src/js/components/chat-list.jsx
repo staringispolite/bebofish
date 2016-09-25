@@ -114,7 +114,14 @@ class ChatList extends React.Component {
     }).then(function(response) {
       // Overwrite client-side message with translated one.
       //console.log("overwriting '" + message.message + "' with '" + response.data.translations[0].translatedText + "'");
-      message.message = response.data.translations[0].translatedText;
+      message.originalMessage = message.message;
+      message.message = "";
+      if ((response.data.translations[0].detectedSourceLanguage !== undefined) && 
+          (response.data.translations[0].detectedSourceLanguage !== toLang)) {
+        message.message = "(" + response.data.translations[0].detectedSourceLanguage + ") ";
+      }
+      message.message += response.data.translations[0].translatedText;
+      message.detectedSourceLanguage = response.data.translations[0].detectedSourceLanguage;
       console.log(response.data);
 
       // Success!
