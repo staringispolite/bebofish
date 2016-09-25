@@ -17,10 +17,66 @@ class ChatList extends React.Component {
     };
     this.usersTyping = {};
     this.emojiFlagsByLangCode = {
-      'en': 'en',
+      'af': 'af',
+      'ar': 'ar',
+      'az': 'az',
+      'be': 'be',
+      'bg': 'bg',
+      'bn': 'bn',
+      'ca': 'ca',
+      'cs': 'cs',
+      'cy': 'cy',
+      'da': 'da',
       'de': 'de',
+      'el': 'el',
+      'en': 'en',
+      'eo': 'eo',
+      'es': 'es',
+      'et': 'et',
+      'eu': 'eu',
+      'fa': 'fa',
+      'fi': 'fi',
       'fr': 'fr',
-      'es': 'es'
+      'ga': 'ga',
+      'gl': 'gl',
+      'gu': 'gu',
+      'hi': 'hi',
+      'hr': 'hr',
+      'ht': 'ht',
+      'hu': 'hu',
+      'id': 'id',
+      'is': 'is',
+      'it': 'it',
+      'iw': 'iw',
+      'ja': 'ja',
+      'ka': 'ka',
+      'kn': 'kn',
+      'ko': 'ko',
+      'la': 'la',
+      'lt': 'lt',
+      'lv': 'lv',
+      'nl': 'nl',
+      'no': 'no',
+      'pl': 'pl',
+      'pt': 'pt',
+      'ro': 'ro',
+      'ru': 'ru',
+      'sk': 'sk',
+      'sl': 'sl',
+      'sq': 'sq',
+      'sr': 'sr',
+      'sv': 'sv',
+      'sw': 'sw',
+      'ta': 'ta',
+      'te': 'te',
+      'th': 'th',
+      'tl': 'tl',
+      'tr': 'tr',
+      'uk': 'uk',
+      'ur': 'ur',
+      'vi': 'vi',
+      'yi': 'yi',
+      'zh': 'zh'
     };
 
     this.getOldMessages = this.getOldMessages.bind(this);
@@ -121,15 +177,17 @@ class ChatList extends React.Component {
     }).then(function(response) {
       // Overwrite client-side message with translated one.
       //console.log("overwriting '" + message.message + "' with '" + response.data.translations[0].translatedText + "'");
-      message.originalMessage = message.message;
-      message.message = "";
-      if ((response.data.translations[0].detectedSourceLanguage !== undefined) && 
-          (response.data.translations[0].detectedSourceLanguage !== toLang)) {
-        var emojiFlag= _this.emojiFlagsByLangCode[response.data.translations[0].detectedSourceLanguage];
-        message.message = "(" + emojiFlag + ") ";
+      if (response.data.translations.length >= 1) {
+        message.originalMessage = message.message;
+        message.message = "";
+        if ((response.data.translations[0].detectedSourceLanguage !== undefined) && 
+            (response.data.translations[0].detectedSourceLanguage !== toLang)) {
+          var emojiFlag= _this.emojiFlagsByLangCode[response.data.translations[0].detectedSourceLanguage];
+          message.message = "(" + emojiFlag + ") ";
+        }
+        message.message += response.data.translations[0].translatedText;
+        message.detectedSourceLanguage = response.data.translations[0].detectedSourceLanguage;
       }
-      message.message += response.data.translations[0].translatedText;
-      message.detectedSourceLanguage = response.data.translations[0].detectedSourceLanguage;
       console.log(response.data);
 
       // Success!
