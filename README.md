@@ -17,7 +17,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4. Check you've got the 'four dots' loading screen at `http://localhost:3000` on a browser
 
 #### Add the room to your Bebo group
-1. Download the Bebo app
+1. Download the [Bebo app](https://itunes.apple.com/us/app/bebo-your-private-server/id943549087?mt=8)
 2. Make sure your phone's on the same wifi network as your laptop
 3. Open your group (or make a new one!)
 4. Click the gears icon, then 'Add Room'
